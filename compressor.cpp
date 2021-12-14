@@ -46,12 +46,13 @@ int main() {
   ifstream arq;
   ofstream arqCompactado;
   string line;
-  arq.open("test.txt");
+  arq.open("BancoDados.txt");
   arqCompactado.open("compText.txt");
 
   // Compacta o Arquivo ;)
   if(arq.is_open()) {
     while(getline(arq, line)) {
+      if(line.empty()) break;
       for(int i = 0; i < line.length(); i++) {
         int init = 4 * i;
         if(init >= line.length()) break;
@@ -96,6 +97,7 @@ int main() {
         stringstream ss;
         int charToNumber = (int)subStringDesc[0] - 65;
         if(charToNumber < 0) {
+          if (charToNumber == -52) continue;
           stringstream transform(subStringDesc);
           transform >> charToNumber;
           arqDescompactado << charToNumber;
