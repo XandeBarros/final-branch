@@ -3,6 +3,7 @@
 #include<sstream>
 #include<string>
 #include<array>
+#include<map>
 using namespace std;
 
 int binaryToDecimal(int numberBinary) {
@@ -43,6 +44,25 @@ array<int, 4> decimalToBinary(int numberDecimal, array<int, 4> arr) {
 }
 
 int main() {
+  map<int, char> TranslateTable = {
+    {13, 'A'},
+    {14, 'B'},
+    {15, 'C'},
+    {16, 'D'},
+    {17, 'E'},
+    {18, 'F'},
+    {19, 'G'},
+    {20, 'H'},
+    {21, 'I'},
+    {22, 'J'},
+    {23, 'K'},
+    {24, 'L'},
+    {25, 'M'},
+    {26, 'N'},
+    {27, 'O'},
+    {28, 'P'},
+  };
+
   ifstream arq;
   ofstream arqCompactado;
   string line;
@@ -63,7 +83,7 @@ int main() {
           int strToNumberBy = stoi(subString);
 
           int numberByToDec = binaryToDecimal(strToNumberBy);
-          char letter = (char)(numberByToDec + 65);
+          char letter = TranslateTable[numberByToDec + 13];
 
           arqCompactado << letter;
         } else {
@@ -80,6 +100,7 @@ int main() {
   arqCompactado.close();
 
   // Descompactar
+  int key = -1;
   ifstream arqCompactadoLeitura;
   ofstream arqDescompactado;
   string lineComp;
@@ -95,16 +116,26 @@ int main() {
       for(int i = 0; i < lineComp.length(); i++) {
         string subStringDesc = lineComp.substr(i, 1);
         stringstream ss;
-        int charToNumber = (int)subStringDesc[0] - 65;
+        for (auto &i : TranslateTable) {
+          if (i.second == subStringDesc[0]) {
+            key = i.first;
+            break; // to stop searching
+          } else if (subStringDesc[0] != '1' && subStringDesc[0] != '0') {
+            key = 0;
+          } else {
+            key = -1;
+          }
+        }
+        int charToNumber = key - 13;
+        cout << charToNumber << endl;
         if(charToNumber < 0) {
-          if (charToNumber == -52) continue;
+          if (charToNumber == -13) continue;
           stringstream transform(subStringDesc);
           transform >> charToNumber;
           arqDescompactado << charToNumber;
           continue;
         }
-        
-        // arqDescompactado << subStringDesc << " | " << charToNumber << " -> ";
+      
         array<int, 4> result = decimalToBinary(charToNumber, numBinary);
         
         for(int i : result)
@@ -114,7 +145,6 @@ int main() {
         ss >> resultado;
         arqDescompactado << resultado;
       }
-      // cout << "Linha: " << lines << " Text: " << lineComp << endl;
       arqDescompactado << "\n";
     }
   } else {
