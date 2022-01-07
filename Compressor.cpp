@@ -41,7 +41,7 @@ private:
   string lineComp;
   array<int, 4> numBinary = {0, 0, 0, 0};
   int key = -1;
-  int aux = 1, aux2; //auxiliar na interface
+  int aux = 1, aux2; // Auxiliar na interface
 
   // Métodos
 
@@ -80,9 +80,32 @@ private:
     }
 
     return arr;
-  }
-public:
+  };
 
+  void interfaceCompactar(string binario, int decimal, char simbolo){
+    if (aux==1){
+      cout << endl << "*** Processo de compactacao ***" << endl << endl;
+      aux = 0;
+    }
+    if (aux2==1){
+      cout << "Vetor lido: " << line << endl;
+    }
+    cout << "   Sequencia identificada: " << binario << endl;
+    cout << "   Numero correspondente em decimal: " << decimal << endl;
+    cout << "   Simbolo correspondente: " << simbolo << endl;
+    cout << endl;
+  };
+
+  void interfaceDescompactar(string sequencia, string simbolo){
+    if (aux==1){
+      cout << endl << "*** Processo de descompactacao ***" << endl << endl;
+      aux = 0;
+    }
+    cout << "Simbolo lido: " << simbolo << endl;
+    cout << "   Sequencia correspondente: " << sequencia << endl;
+    cout << endl;
+  };
+public:
   bool compactar(string arq) {
     arqInicial.open(arq);
     int len = arq.size() - 4;
@@ -132,9 +155,7 @@ public:
     arqDescompactado.open(arqDesc);
     aux = 1; //Auxiliar da interface com usuário
     if(arqCompactadoLeitura.is_open()) {
-      int lines = 0;
       while(getline(arqCompactadoLeitura, lineComp)) {
-        lines++;
         for(int i = 0; i < lineComp.length(); i++) {
           string subStringDesc = lineComp.substr(i, 1); //Lê um elemento por vez do arquivo compactado
           stringstream ss;
@@ -180,30 +201,6 @@ public:
 
     return true;
   };
-
-  void interfaceCompactar(string binario, int decimal, char simbolo){
-    if (aux==1){
-        cout << endl << "*** Processo de compactacao ***" << endl << endl;
-        aux = 0;
-    }
-    if (aux2==1){
-        cout << "Vetor lido: " << line << endl;
-    }
-    cout << "   Sequencia identificada: " << binario << endl;
-    cout << "   Numero correspondente em decimal: " << decimal << endl;
-    cout << "   Simbolo correspondente: " << simbolo << endl;
-    cout << endl;
-  }
-
-  void interfaceDescompactar(string sequencia, string simbolo){
-    if (aux==1){
-        cout << endl << "*** Processo de descompactacao ***" << endl << endl;
-        aux = 0;
-    }
-    cout << "Simbolo lido: " << simbolo << endl;
-    cout << "   Sequencia correspondente: " << sequencia << endl;
-    cout << endl;
-  }
 };
 
 int main() {
