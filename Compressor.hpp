@@ -4,6 +4,7 @@
 #include<string>
 #include<array>
 #include<map>
+#include"Interface.hpp"
 
 using namespace std;
 
@@ -28,6 +29,10 @@ private:
     {28, 'P'},
   };
 
+  // Interface
+
+  Interface interface;
+
   // Atributos da Compactação
 
   ifstream arqInicial;
@@ -41,14 +46,11 @@ private:
   string lineComp;
   array<int, 4> numBinary = {0, 0, 0, 0};
   int key = -1;
-  int aux = 1, aux2; // Auxiliar na interface
 
   // Métodos Privados
 
   int binaryToDecimal(int numberBinary);
   array<int, 4> decimalToBinary(int numberDecimal, array<int, 4> arr);
-  void interfaceCompactar(string binario, int decimal, char simbolo);
-  void interfaceDescompactar(string sequencia, string simbolo);
 public:
   bool compactar(string arq);
   bool descompactar(string arq);

@@ -39,40 +39,16 @@ array<int, 4> Compressor::decimalToBinary(int numberDecimal, array<int, 4> arr) 
   return arr;
 };
 
-void Compressor::interfaceCompactar(string binario, int decimal, char simbolo) {
-  if (aux==1) {
-    cout << endl << "#*#*#* Processo de Compactacao *#*#*#" << endl << endl;
-    aux = 0;
-  }
-  if (aux2==1) {
-    cout << "  -> Vetor lido: " << line << endl;
-  }
-  cout << "    -> Sequencia identificada: " << binario << endl;
-  cout << "    -> Numero correspondente em decimal: " << decimal << endl;
-  cout << "    -> Simbolo correspondente: " << simbolo << endl;
-  cout << endl;
-};
-
-void Compressor::interfaceDescompactar(string sequencia, string simbolo) {
-  if (aux==1){
-    cout << endl << "*** Processo de Descompactacao ***" << endl << endl;
-    aux = 0;
-  }
-  cout << "  -> Simbolo lido: " << simbolo << endl;
-  cout << "    -> Sequencia correspondente: " << sequencia << endl;
-  cout << endl;
-};
-
 bool Compressor::compactar(string arq) {
   arqInicial.open(arq);
   int len = arq.size() - 4;
   string arqComp = arq.substr(0, len) + "Compactado.txt";
   arqCompactado.open(arqComp);
+  int auxInterface = 0;
 
   if(arqInicial.is_open()) {
     while(getline(arqInicial, line)) {
       if(line.empty()) break;
-      aux2 = 1;
       for(int i = 0; i < line.length(); i++) {
         int init = 4 * i;
         if(init >= line.length()) break;
@@ -85,8 +61,8 @@ bool Compressor::compactar(string arq) {
           int numberByToDec = binaryToDecimal(strToNumberBy);
           char letter = TranslateTable[numberByToDec + 13];
 
-          interfaceCompactar(subString, numberByToDec, letter);
-          aux2 = 0;
+          interface.interfaceCompactar(subString, numberByToDec, letter, line, auxInterface, init);
+          auxInterface = 1;
           arqCompactado << letter;
         } else {
           arqCompactado << subString;
@@ -110,6 +86,8 @@ bool Compressor::descompactar(string arq) {
   string arqDesc = arq.substr(0, len) + "Descompactado.txt";
   arqCompactadoLeitura.open(arqComp);
   arqDescompactado.open(arqDesc);
+  int auxInterface = 0;
+  
   if(arqCompactadoLeitura.is_open()) {
     while(getline(arqCompactadoLeitura, lineComp)) {
       for(int i = 0; i < lineComp.length(); i++) {
@@ -142,7 +120,8 @@ bool Compressor::descompactar(string arq) {
         string resultado;
         ss >> resultado;
 
-        interfaceDescompactar(resultado, subStringDesc);
+        interface.interfaceDescompactar(resultado, subStringDesc, auxInterface);
+        auxInterface = 1;
 
         arqDescompactado << resultado;
       }

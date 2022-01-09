@@ -1,5 +1,4 @@
 #include"Compressor.hpp"
-#include"Interface.hpp"
 using namespace std;
 
 int main() {
