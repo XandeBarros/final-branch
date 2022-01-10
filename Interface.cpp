@@ -4,7 +4,12 @@ using namespace std;
 
 int Interface::menu() {
   int result;
-  cout << endl << "*#*#*#*#*#*#*#*#*#*#*#*#*#*# Menu Principal #*#*#*#*#*#*#*#*#*#*#*#*#*#*" << endl;
+
+  cout << "   _____ _____ _____ _____ " << endl;
+  cout << "  |     |   __|   | |  |  |" << endl;
+  cout << "  | | | |   __| | | |  |  |" << endl;
+  cout << "  |_|_|_|_____|_|___|_____|" << endl;
+                         
   cout << endl << "  Escolha uma opcao do menu abaixo: " << endl << endl;
 
   cout << "  1) Comprimir" << endl;
@@ -40,4 +45,31 @@ void Interface::interfaceDescompactar(string sequencia, string simbolo, int inic
   cout << "  -> Simbolo lido: " << simbolo << endl;
   cout << "    -> Sequencia correspondente: " << sequencia << endl;
   cout << endl;
+};
+
+void Interface::interfaceInicio() {
+  cout << "   _____ _____ _____    _____ _____ _____ ____  _____" << endl;
+  cout << "  | __  |   __|     |  |  |  |     |   | |    \\|     |" << endl;
+  cout << "  | __ -|   __| | | |  |  |  |-   -| | | |  |  |  |  |" << endl;
+  cout << "  |_____|_____|_|_|_|   \\___/|_____|_|___|____/|_____|" << endl;                                                    
+};
+
+void Interface::interfaceFinal() {
+  cout << "   _____  _____  _____ " << endl; 
+  cout << "  |  |  ||   __||  _  |" << endl;
+  cout << "  |  |  ||__   ||   __|" << endl;
+  cout << "  |_____||_____||__|   " << endl;   
+
+  cout << endl;
+  cout << endl;
+
+  cout << "   _____  _____  _____  ___  ___  ___  ___   " << endl;   
+  cout << "  |   __||   __||     ||   ||  _|| . ||_  |  " << endl;  
+  cout << "  |__   ||   __|| | | || | ||_  || . | _| |_ " << endl;
+  cout << "  |_____||_____||_|_|_||___||___||___||_____|" << endl;
+
+  cout << endl;
+  cout << endl;
+
+  system("pause");
 };

@@ -7,9 +7,14 @@ int main() {
   string arquivoCmp, arquivoDmp;
   bool loop = true;
   
+  interface.interfaceInicio();
+
   while(loop) {
     int menuOp = interface.menu();
-    if (menuOp == 3) break;
+    if (menuOp == 3) {  
+      interface.interfaceFinal();
+      break;
+    };
 
     switch (menuOp) {
       case 1:
